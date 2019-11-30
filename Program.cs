@@ -18,11 +18,6 @@ namespace LogApi
                          .ReadFrom.Configuration(configuration)
                          .CreateLogger();
 
-            //.MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-            //.Enrich.FromLogContext()
-            //.WriteTo.Console()
-            //.WriteTo.Seq(
-            //    Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341")
 
             try
             {
