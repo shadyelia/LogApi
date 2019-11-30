@@ -26,7 +26,7 @@ namespace LogApi.Controllers
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
-            _logger.LogInformation("Hello, Name!");
+            _logger.LogInformation("Hello, WORLD!");
             var rng = new Random();
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

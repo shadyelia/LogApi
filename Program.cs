@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Serilog;
-using Serilog.Events;
+using System;
 
 namespace LogApi
 {
@@ -15,15 +10,19 @@ namespace LogApi
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var configuration = new ConfigurationBuilder()
+                                    .AddJsonFile("appsettings.json")
+                                    .Build();
 
             Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
-            .Enrich.FromLogContext()
-            .WriteTo.Console()
-            .WriteTo.Seq(
-                Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341")
-            .CreateLogger();
+                         .ReadFrom.Configuration(configuration)
+                         .CreateLogger();
+
+            //.MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+            //.Enrich.FromLogContext()
+            //.WriteTo.Console()
+            //.WriteTo.Seq(
+            //    Environment.GetEnvironmentVariable("SEQ_URL") ?? "http://localhost:5341")
 
             try
             {
